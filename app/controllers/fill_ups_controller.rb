@@ -1,9 +1,11 @@
-class FillUpsController < ApplicationController
-  before_action :set_fill_up, only: [:show, :update, :destroy]
+# frozen_string_literal: true
+
+class FillUpsController < ProtectedController
+  before_action :set_fill_up, only: %i[show update destroy]
 
   # GET /fill_ups
   def index
-    @fill_ups = FillUp.all
+    @fill_ups = current_user.fill_ups
 
     render json: @fill_ups
   end
@@ -15,7 +17,7 @@ class FillUpsController < ApplicationController
 
   # POST /fill_ups
   def create
-    @fill_up = FillUp.new(fill_up_params)
+    @fill_up = current_user.fill_ups.build(fill_up_params)
 
     if @fill_up.save
       render json: @fill_up, status: :created, location: @fill_up
@@ -39,13 +41,14 @@ class FillUpsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_fill_up
-      @fill_up = FillUp.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def fill_up_params
-      params.require(:fill_up).permit(:date, :mileage, :gallons, :mpg, :price)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_fill_up
+    @fill_up = current_user.fill_ups.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def fill_up_params
+    params.require(:fill_up).permit(:date, :mileage, :gallons, :mpg, :price)
+  end
 end
