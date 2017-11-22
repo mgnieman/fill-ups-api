@@ -12,3 +12,5 @@ curl --include --request PATCH "http://localhost:4741/fill_ups/${ID}" \
       "price": "'"${PRICE}"'"
     }
   }'
+
+  echo
