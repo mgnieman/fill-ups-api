@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171122144457) do
+ActiveRecord::Schema.define(version: 20171128194723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 20171122144457) do
   create_table "fill_ups", force: :cascade do |t|
     t.date "date"
     t.integer "mileage"
-    t.integer "gallons"
+    t.float "gallons"
     t.integer "mpg"
-    t.integer "price"
+    t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
