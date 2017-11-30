@@ -16,9 +16,6 @@ require 'action_controller/railtie'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-
-headers['Access-Control-Allow-Origin'] = 'https://fill-ups.herokuapp.com/'
-
 Bundler.require(*Rails.groups)
 
 module FillUpsApi
